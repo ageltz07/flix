@@ -1,0 +1,18 @@
+<h1>New review for <%= link_to(@movie.title, @movie) %></h1>
+
+<%= form_with(model: [@movie, @review]) do |f| %>
+  <%= render("shared/errors", object: @review) %>
+
+  <div class="legend">Stars</div>
+  <% Review::STARS.each do |star| %>
+    <span class="star">
+      <%= f.radio_button :stars, star %>
+      <%= f.label :stars, star, value: star %>
+    </span>
+  <% end %>
+
+  <%= f.label :comment %>
+  <%= f.text_area(:comment, placeholder: "What did you think?") %>
+
+  <%= f.submit "Post Review" %>
+<% end %>
