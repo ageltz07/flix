@@ -1,7 +1,5 @@
 class UsersController < ApplicationController
 
-  before_save :format_username
-
   before_action :require_signin, except: [:new, :create]
   before_action :require_correct_user, only: [:edit, :update]
   before_action :require_admin, only: [:destroy]
@@ -62,7 +60,4 @@ class UsersController < ApplicationController
     redirect_to(root_url, status: :see_other) unless current_user?(@user)
   end
 
-  def format_username
-    self.username = username.downcase
-  end
 end
